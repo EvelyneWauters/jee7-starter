@@ -25,6 +25,10 @@ public class PassengerPersistenceTest extends PersistenceTest {
     @Test
     public void returnAllPassengers() throws Exception  {
         List<Passenger> resultList = entityManager().createQuery("select p from Passenger p", Passenger.class).getResultList();
-        assertNotNull(resultList);
+        String name = null;
+        for (Passenger passenger : resultList) {
+            name = passenger.getFirstName();
+        }
+        assertNull(name);
     }
 }
