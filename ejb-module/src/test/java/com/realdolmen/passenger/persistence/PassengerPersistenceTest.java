@@ -25,5 +25,4 @@ public class PassengerPersistenceTest extends PersistenceTest {
         List<Passenger> resultList = entityManager().createQuery("select p from Passenger p", Passenger.class).getResultList();
         assertNotNull(resultList);
     }
-
 }
