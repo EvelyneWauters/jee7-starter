@@ -3,18 +3,18 @@ package com.realdolmen.passenger.domain;
 import javax.persistence.*;
 
 @Entity
-//@SecondaryTables({
-//@SecondaryTable(name = "passenger_meta")})
+@SecondaryTables({
+@SecondaryTable(name = "passenger_meta")})
 public class Passenger {
     @EmbeddedId
     private PassengerId passengerId;
 
     private String firstName;
 
-//    @Column(table = "passenger_meta")
+    @Column(table = "passenger_meta")
     private Integer frequentFlyerMiles;
 
-//    @Column(table = "passenger_meta")
+    @Column(table = "passenger_meta")
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private byte[] picture;
