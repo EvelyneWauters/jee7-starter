@@ -2,11 +2,13 @@ package com.realdolmen.course.persistence;
 
 import com.realdolmen.course.domain.Book;
 import com.realdolmen.course.persistence.DataSetPersistenceTest;
+import com.realdolmen.passenger.domain.Passenger;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javax.persistence.PersistenceException;
+import java.rmi.server.ExportException;
 
 public class BookPersistenceTest extends DataSetPersistenceTest {
     @Rule
@@ -18,6 +20,7 @@ public class BookPersistenceTest extends DataSetPersistenceTest {
         entityManager().persist(book);
         assertNotNull(book.getId());
     }
+
 
     @Test(expected = PersistenceException.class)
     public void bookCanNotBePersistedWithoutTitle() throws Exception {

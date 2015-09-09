@@ -11,6 +11,9 @@ import java.util.List;
 @Named
 @RequestScoped
 public class BookController {
+
+    //dependency injection, gaat via JNDI de BookRepository terugvinden, gebeurt allemaal automatisch
+    // vroeger gebruikte men @Resource(lookup="jndi name")
     @Inject
     BookRepository repository;
 

@@ -14,6 +14,9 @@
 	<version>1.1</version>
 	<packaging>war</packaging>
 
+
+	<!--web module is afhankelijk van de ejb-module-->
+	<!--mag scope: provided zijn, want zit ook al in andere module-->
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
