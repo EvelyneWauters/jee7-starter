@@ -1,47 +1,37 @@
 package com.realdolmen.passenger.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
+//@SecondaryTables({
+//@SecondaryTable(name = "passenger_meta")})
 public class Passenger {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String ssn;
+    @EmbeddedId
+    private PassengerId passengerId;
+
     private String firstName;
-    private String lastName;
+
+//    @Column(table = "passenger_meta")
     private Integer frequentFlyerMiles;
+
+//    @Column(table = "passenger_meta")
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    private byte[] picture;
+
 
     public Passenger() {
     }
 
-    public Passenger(String ssn, String firstName, String lastName, Integer frequentFlyerMiles) {
-        this.ssn = ssn;
+    public Passenger(String firstName, Integer frequentFlyerMiles) {
         this.firstName = firstName;
-        this.lastName = lastName;
         this.frequentFlyerMiles = frequentFlyerMiles;
     }
 
-
-    public Integer getId() {
-        return id;
-    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-
-    public String getSsn() {
-        return ssn;
+    public PassengerId getId() {
+        return passengerId;
     }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -51,19 +41,27 @@ public class Passenger {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Integer getFrequentFlyerMiles() {
         return frequentFlyerMiles;
     }
 
     public void setFrequentFlyerMiles(Integer frequentFlyerMiles) {
         this.frequentFlyerMiles = frequentFlyerMiles;
+    }
+
+    public PassengerId getPassengerId() {
+        return passengerId;
+    }
+
+    public void setPassengerId(PassengerId passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public byte[] getPicture() {
+        return picture;
+    }
+
+    public void setPicture(byte[] picture) {
+        this.picture = picture;
     }
 }

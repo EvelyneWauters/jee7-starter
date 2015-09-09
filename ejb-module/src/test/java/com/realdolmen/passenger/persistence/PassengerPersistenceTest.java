@@ -2,6 +2,7 @@ package com.realdolmen.passenger.persistence;
 
 import com.realdolmen.course.persistence.PersistenceTest;
 import com.realdolmen.passenger.domain.Passenger;
+import com.realdolmen.passenger.domain.PassengerId;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,7 +16,8 @@ public class PassengerPersistenceTest extends PersistenceTest {
 
     @Test
     public void passengerCanBePersisted() throws Exception {
-        Passenger passenger = new Passenger("whatsthis", "Doctor", "Who", 1507);
+        Passenger passenger = new Passenger("Doctor", 8000);
+        passenger.setPassengerId(new PassengerId("ssn", "Who"));
         entityManager().persist(passenger);
         assertNotNull(passenger.getId());
     }
