@@ -1,10 +1,7 @@
 package com.realdolmen.passenger.domain;
 import javax.persistence.*;
 import java.time.Year;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Passenger {
@@ -21,52 +18,35 @@ public class Passenger {
     @Column (length = 50)
     private String lastName;
 
-    @Temporal(TemporalType.DATE)
-    @Column (updatable = false)
-    private Calendar dateOfBirth;
-
-    @Transient
-    private int age;
-
-    @Enumerated (EnumType.STRING)
-    @Column (nullable = false)
+    @Enumerated
     private PassengerType passengerType;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar lastFlight;
+    @Version
+    private Integer version;
 
-    private Integer frequentFlyerMiles;
+    @Column (nullable = false)
+    private int frequentFlyerMiles;
 
-    @Embedded
-    private CreditCard creditCard;
-
-    @Embedded
-    private Address address;
-
-    @ElementCollection
-    private List<String> preferences;
+    @OneToMany
+    private List<Ticket> ticket = new ArrayList<>();
 
 
     public Passenger() {
     }
 
-    public Passenger(String ssn, String firstName, String lastName, Calendar dateOfBirth, PassengerType passengerType, Calendar lastFlight, Integer frequentFlyerMiles) {
-        this.ssn = ssn;
+    public Passenger(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = dateOfBirth;
-        this.passengerType = passengerType;
-        this.lastFlight = lastFlight;
-        this.frequentFlyerMiles = frequentFlyerMiles;
     }
+
 
     public Integer getId() {
         return id;
     }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getSsn() {
         return ssn;
@@ -92,31 +72,6 @@ public class Passenger {
         this.lastName = lastName;
     }
 
-    public Integer getFrequentFlyerMiles() {
-        return frequentFlyerMiles;
-    }
-
-    public void setFrequentFlyerMiles(Integer frequentFlyerMiles) {
-        this.frequentFlyerMiles = frequentFlyerMiles;
-    }
-
-    public Calendar getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Calendar dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public int getAge() {
-        this.setAge();
-        return this.age;
-    }
-
-    public void setAge() {
-        this.age = this.getDateOfBirth().YEAR -  (new GregorianCalendar()).YEAR;
-    }
-
     public PassengerType getPassengerType() {
         return passengerType;
     }
@@ -125,35 +80,28 @@ public class Passenger {
         this.passengerType = passengerType;
     }
 
-    public Calendar getLastFlight() {
-        return lastFlight;
+
+    public Integer getVersion() {
+        return version;
     }
 
-    public void setLastFlight(Calendar lastFlight) {
-        this.lastFlight = lastFlight;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public int getFrequentFlyerMiles() {
+        return frequentFlyerMiles;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setFrequentFlyerMiles(int frequentFlyerMiles) {
+        this.frequentFlyerMiles = frequentFlyerMiles;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
+    public List<Ticket> getTicket() {
+        return ticket;
     }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setTicket(List<Ticket> ticket) {
+        this.ticket = ticket;
     }
 }

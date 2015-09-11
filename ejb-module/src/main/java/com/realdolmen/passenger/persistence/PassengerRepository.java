@@ -11,5 +11,17 @@ public interface PassengerRepository {
 
     public List<Passenger> findAll();
 
-    public void addPassenger(Passenger p);
+    public void savePassenger(Passenger p);
+
+    public Passenger findById(int id);
+
+    public void updatePassenger(Passenger passenger);
+
+    public void deletePassengerById(int id);
+
+    List<String> findAllLastNames();
+
+    int getTotalFrequentFlyerMiles();
+
+    void deleteAllPassengers();
 }

@@ -3,42 +3,94 @@ package com.realdolmen.passenger.persistence;
 import com.realdolmen.course.domain.Book;
 import com.realdolmen.passenger.domain.Passenger;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 public class PassengerRepositoryImplementation implements PassengerRepository {
+
+    @PersistenceContext
+    EntityManager entityManager;
+
+
     @Override
     public List<Passenger> findAll() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("huh?");
-        EntityManager em = null;
-
-        try {
-            em = entityManagerFactory.createEntityManager();
-            return em.createQuery("select p from Passenger p", Passenger.class).getResultList();
-        } finally   {
-            if (em != null) {
-                em.close();
-            }
-        }
+        return entityManager.createQuery("select p from Passenger p", Passenger.class).getResultList();
     }
 
     @Override
-    public void addPassenger(Passenger p) {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("huh?");
-        EntityManager em = null;
-
-        try {
-            em = entityManagerFactory.createEntityManager();
-            em.persist(p);
-
-        } finally   {
-            if (em != null) {
-                em.close();
-            }
-        }
+    public void savePassenger(Passenger p) {
+        entityManager.persist(p);
     }
+
+
+    @Override
+    public Passenger findById(int id)    {
+        return entityManager.find(Passenger.class, id);
+    }
+
+
+
+    @Override
+    public void updatePassenger(Passenger passenger) {
+        entityManager.find(Passenger.class, passenger.getId());
+        entityManager.persist(passenger);
+    }
+
+    @Override
+    public void deletePassengerById(int id) {
+        Passenger p = entityManager.getReference(Passenger.class, id);
+        entityManager.remove(p);
+    }
+
+    @Override
+    public List<String> findAllLastNames() {
+        return entityManager.createQuery("select p.lastName from Passenger p").getResultList();
+    }
+
+    @Override
+    public int getTotalFrequentFlyerMiles() {
+        List frequentFlyerMilesList = entityManager.createQuery("select p.frequentFlyerMiles from Passenger p").getResultList();
+        int totalFrequentFlyerMiles = 0;
+
+        //gaat natuurlijk nog beter met een SUM-query
+
+        for (Object miles : frequentFlyerMilesList) {
+            int i = (Integer) miles;
+            totalFrequentFlyerMiles = totalFrequentFlyerMiles + i;
+        }
+        return totalFrequentFlyerMiles;
+    }
+
+
+
+
+
+    @Override
+    public void deleteAllPassengers() {
+        //bulk delete:
+        entityManager.createQuery("delete from Ticket t").executeUpdate();
+        entityManager.createQuery("delete from Passenger p").executeUpdate();
+
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

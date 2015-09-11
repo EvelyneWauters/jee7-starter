@@ -19,7 +19,7 @@
                 + Fast
                 - Not as close to real environment
                 - No eyeball asserts
-        - Use in-container tests (such as with Arquillian)
+            - Use in-container tests (such as with Arquillian)
                 + Less hassle once (if ever) you figure out how to configure it
                 - Tests rely on app server (maybe not a real issue if also adding functional tests such as with Selenium)
                 - Slow
@@ -46,6 +46,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>com.realdolmen.passenger.domain.Passenger</class>
+        <class>com.realdolmen.passenger.domain.Ticket</class>
+
+
         <class>com.realdolmen.course.domain.Book</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
