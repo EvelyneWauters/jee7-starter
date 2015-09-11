@@ -74,7 +74,6 @@ public class PassengerRepositoryImplementation implements PassengerRepository {
         //bulk delete:
         entityManager.createQuery("delete from Ticket t").executeUpdate();
         entityManager.createQuery("delete from Passenger p").executeUpdate();
-
     }
 
 
