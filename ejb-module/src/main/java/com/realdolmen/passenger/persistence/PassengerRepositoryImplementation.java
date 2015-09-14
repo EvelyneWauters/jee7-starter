@@ -2,14 +2,18 @@ package com.realdolmen.passenger.persistence;
 
 import com.realdolmen.course.domain.Book;
 import com.realdolmen.passenger.domain.Passenger;
+import com.realdolmen.passenger.domain.Ticket;
 
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-
+@Stateless
+@LocalBean
 public class PassengerRepositoryImplementation implements PassengerRepository {
 
     @PersistenceContext
@@ -66,15 +70,20 @@ public class PassengerRepositoryImplementation implements PassengerRepository {
     }
 
 
-
-
-
     @Override
     public void deleteAllPassengers() {
         //bulk delete:
         entityManager.createQuery("delete from Ticket t").executeUpdate();
         entityManager.createQuery("delete from Passenger p").executeUpdate();
     }
+
+    @Override
+    public List<Ticket> findTicketByPassengerId(int i) {
+        //TODO: implement this query the right way
+        //entityManager.createQuery("select p.ticketList from Passenger p join where p");
+        return null;
+    }
+
 
 
 }

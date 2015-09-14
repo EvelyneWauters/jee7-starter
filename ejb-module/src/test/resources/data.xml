@@ -6,5 +6,7 @@
 
     <passenger id="500" firstName="Lars" lastName="De Pauw" ssn="1398723" frequentFlyerMiles="30"/>
     <passenger id="600" firstName="Hubert" lastName="Bullen" ssn="12987249" frequentFlyerMiles="50"/>
+    <ticket id="1" price="789"/>
+    <passenger_ticket Passenger_id="500" ticketList_id="1"/>
 
 </dataset>

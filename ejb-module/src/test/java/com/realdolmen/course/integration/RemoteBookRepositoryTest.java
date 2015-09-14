@@ -1,6 +1,7 @@
 package com.realdolmen.course.integration;
 
 import com.realdolmen.course.persistence.RemoteBookRepository;
+import com.realdolmen.passenger.persistence.PassengerRepository;
 import org.junit.Assume;
 import org.junit.Test;
 

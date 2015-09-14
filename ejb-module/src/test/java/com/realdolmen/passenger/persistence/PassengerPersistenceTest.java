@@ -3,7 +3,9 @@ import com.realdolmen.course.persistence.DataSetPersistenceTest;
 import com.realdolmen.course.persistence.PersistenceTest;
 import com.realdolmen.passenger.domain.Passenger;
 import com.realdolmen.passenger.domain.PassengerType;
+import com.realdolmen.passenger.domain.Ticket;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -22,7 +24,6 @@ public class PassengerPersistenceTest extends DataSetPersistenceTest {
         passengerRepository = new PassengerRepositoryImplementation();
         passengerRepository.entityManager = entityManager();
     }
-
 
 
 
@@ -63,11 +64,27 @@ public class PassengerPersistenceTest extends DataSetPersistenceTest {
         assertEquals(80, totalFrequentFlyerMiles);
     }
 
+    @Ignore
     @Test
     public void deleteAllPassengersTest() throws Exception  {
         passengerRepository.deleteAllPassengers();
         assertEquals(0, passengerRepository.findAll().size());
     }
+
+//    @Test
+//    public void assignTicketToPassengerById() throws Exception  {
+//        Ticket ticket = new Ticket(333);
+//        Passenger lars = passengerRepository.findById(500);
+//        lars.addTicket(ticket);
+//        passengerRepository.updatePassenger(lars);
+//        assertEquals(333, passengerRepository.findById(500).getTicket().get(0).getPrice());
+//    }
+//
+//    @Test
+//    public void findTicketsByPassngerId() throws Exception  {
+//        Ticket ticket = passengerRepository.findTicketByPassengerId(500);
+//        assertEquals(789, ticket.getPrice());
+//    }
 
 
 //    @Test

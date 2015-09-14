@@ -1,12 +1,12 @@
 package com.realdolmen.passenger.persistence;
 
 import com.realdolmen.passenger.domain.Passenger;
+import com.realdolmen.passenger.domain.Ticket;
 
+import javax.ejb.Remote;
 import java.util.List;
 
-/**
- * Created by EWTAX45 on 9/09/2015.
- */
+@Remote
 public interface PassengerRepository {
 
     public List<Passenger> findAll();
@@ -24,4 +24,6 @@ public interface PassengerRepository {
     int getTotalFrequentFlyerMiles();
 
     void deleteAllPassengers();
+
+    List<Ticket> findTicketByPassengerId(int i);
 }

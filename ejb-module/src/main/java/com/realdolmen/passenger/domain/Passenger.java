@@ -1,10 +1,14 @@
 package com.realdolmen.passenger.domain;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.Year;
 import java.util.*;
 
 @Entity
-public class Passenger {
+public class Passenger implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -18,6 +22,12 @@ public class Passenger {
     @Column (length = 50)
     private String lastName;
 
+    @Temporal (TemporalType.TIME)
+    private Date birthdate;
+
+    @Transient
+    private int age;
+
     @Enumerated
     private PassengerType passengerType;
 
@@ -28,7 +38,10 @@ public class Passenger {
     private int frequentFlyerMiles;
 
     @OneToMany
-    private List<Ticket> ticket = new ArrayList<>();
+    private List<Ticket> ticketList = new ArrayList<>();
+
+    @Embedded
+    private PassengerAddress address;
 
 
     public Passenger() {
@@ -80,7 +93,6 @@ public class Passenger {
         this.passengerType = passengerType;
     }
 
-
     public Integer getVersion() {
         return version;
     }
@@ -98,10 +110,53 @@ public class Passenger {
     }
 
     public List<Ticket> getTicket() {
-        return ticket;
+        return ticketList;
+    }
+
+    public void addTicket(Ticket t) {
+        this.ticketList.add(t);
     }
 
     public void setTicket(List<Ticket> ticket) {
-        this.ticket = ticket;
+        this.ticketList = ticket;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+        this.setAge();
+    }
+
+    private void setAge() {
+        Date date = new Date();
+
+        //LocalDateTime now = LocalDateTime.now();     // The current date and time
+        //LocalDate.of(2012, Month.DECEMBER, 12); // from values
+
+        //LocalTime.of(17, 18); // the train I took home today
+        //LocalTime.parse("10:15:30"); // From a String
+
+        //date.se
+        //this.age = LocalDateTime.now().getYear() - ;
+    }
+
+    public List<Ticket> getTicketList() {
+        return ticketList;
+    }
+
+    public void setTicketList(List<Ticket> ticketList) {
+        this.ticketList = ticketList;
+    }
+
+
+    public PassengerAddress getAddress() {
+        return address;
+    }
+
+    public void setAddress(PassengerAddress address) {
+        this.address = address;
     }
 }

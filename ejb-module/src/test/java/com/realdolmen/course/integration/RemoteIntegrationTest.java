@@ -28,6 +28,8 @@ public abstract class RemoteIntegrationTest extends DataSetPersistenceTest {
         return System.getProperty(INTEGRATION_ENABLED_SYSTEM_PROPERTY) != null;
     }
 
+
+    //deze environment variables zijn spijtig genoeg vendor-afhankelijk
     private Hashtable<String, Object> jdniProperties() {
         Hashtable<String, Object> properties = new Hashtable<>();
         properties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");

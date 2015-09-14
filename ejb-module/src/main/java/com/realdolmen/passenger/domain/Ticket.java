@@ -1,13 +1,14 @@
 package com.realdolmen.passenger.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by EWTAX45 on 11/09/2015.
  */
 
 @Entity
-public class Ticket {
+public class Ticket implements Serializable{
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -16,6 +17,11 @@ public class Ticket {
 
     public Ticket() {
     }
+
+    public Ticket(int price) {
+        this.price = price;
+    }
+
 
 
     public Integer getId() {
