@@ -24,4 +24,8 @@ public class BookController {
     public void remove(int bookId) {
         repository.remove(bookId);
     }
+
+    public String getTitle() {
+        return null;
+    }
 }

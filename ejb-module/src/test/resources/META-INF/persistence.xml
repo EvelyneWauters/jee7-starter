@@ -47,6 +47,7 @@
 
         <class>com.realdolmen.passenger.domain.Passenger</class>
         <class>com.realdolmen.passenger.domain.Ticket</class>
+        <class>com.realdolmen.passenger.domain.Flight</class>
 
 
         <class>com.realdolmen.course.domain.Book</class>

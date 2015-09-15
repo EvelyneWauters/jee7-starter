@@ -14,6 +14,8 @@ public class Ticket implements Serializable{
     private Integer id;
     private int price;
 
+    @ManyToOne
+    private Flight flight;
 
     public Ticket() {
     }
@@ -22,7 +24,13 @@ public class Ticket implements Serializable{
         this.price = price;
     }
 
+    public Flight getFlight() {
+        return flight;
+    }
 
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 
     public Integer getId() {
         return id;

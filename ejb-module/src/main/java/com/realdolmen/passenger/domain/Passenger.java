@@ -28,13 +28,10 @@ public class Passenger implements Serializable {
     @Transient
     private int age;
 
-    @Enumerated
+    @Enumerated (EnumType.STRING)
     private PassengerType passengerType;
 
-    @Version
-    private Integer version;
-
-    @Column (nullable = false)
+    @Column
     private int frequentFlyerMiles;
 
     @OneToMany
@@ -91,14 +88,6 @@ public class Passenger implements Serializable {
 
     public void setPassengerType(PassengerType passengerType) {
         this.passengerType = passengerType;
-    }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
     }
 
     public int getFrequentFlyerMiles() {
@@ -159,4 +148,6 @@ public class Passenger implements Serializable {
     public void setAddress(PassengerAddress address) {
         this.address = address;
     }
+
+
 }

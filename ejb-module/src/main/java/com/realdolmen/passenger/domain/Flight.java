@@ -1,13 +1,14 @@
 package com.realdolmen.passenger.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by EWTAX45 on 14/09/2015.
  */
 @Entity
-public class Flight {
+public class Flight implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)

@@ -31,7 +31,7 @@ public class PassengerStatefulBeanTest extends RemoteBookRepositoryTest {
         passengerStatefulBean.createPassenger("Noor", "Anthonis");
         passengerStatefulBean.addAddress("Kruisstraat", "Zoutleeuw");
         Passenger passenger = entityManager().createQuery("select p from Passenger p where p.firstName='Noor'", Passenger.class).getSingleResult();
-        assertNull( passenger.getAddress());
+        assertNotNull( passenger.getAddress());
         //todo: fix this test!!
     }
 }
