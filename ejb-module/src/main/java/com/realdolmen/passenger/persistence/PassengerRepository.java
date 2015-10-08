@@ -25,5 +25,6 @@ public interface PassengerRepository {
 
     void deleteAllPassengers();
 
-    List<Ticket> findTicketByPassengerId(int i);
+    public List<Passenger> findPassengerByName(String string);
+
 }

@@ -7,23 +7,24 @@ import com.realdolmen.passenger.domain.Ticket;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-@Stateless
-@LocalBean
-public class PassengerRepositoryImplementation implements PassengerRepository {
+    @Stateless
+    @LocalBean
+    public class PassengerRepositoryImplementation implements PassengerRepository, Serializable {
 
-    @PersistenceContext
-    EntityManager entityManager;
+        @PersistenceContext
+        EntityManager entityManager;
 
 
-    @Override
-    public List<Passenger> findAll() {
-        return entityManager.createQuery("select p from Passenger p", Passenger.class).getResultList();
-    }
+        @Override
+        public List<Passenger> findAll() {
+            return entityManager.createQuery("select p from Passenger p", Passenger.class).getResultList();
+        }
 
     @Override
     public void savePassenger(Passenger p) {
@@ -78,12 +79,10 @@ public class PassengerRepositoryImplementation implements PassengerRepository {
     }
 
     @Override
-    public List<Ticket> findTicketByPassengerId(int i) {
-        //TODO: implement this query the right way
-        //entityManager.createQuery("select p.ticketList from Passenger p join where p");
-        return null;
-    }
+    public List<Passenger> findPassengerByName(String str) {
+        return entityManager.createQuery("select p from Passenger p where p.firstName like :str OR p.lastName like :str", Passenger.class).setParameter("str", "%str%").getResultList();
 
+    }
 
 
 }

@@ -12,13 +12,18 @@
         <meta charset="UTF-8"/>
         <title>Home</title>
     </h:head>
-    <h:body>
+    <h:body style="padding: 3rem">
         <h1>Home</h1>
         <p>Landing page.</p>
 
-       <span><p:link outcome="/books.xhtml">List of books</p:link></span> <br/>
+        <span><p:link outcome="/books.xhtml">List of books</p:link></span> <br/>
         <span><p:link outcome="/passengerlist.xhtml">List of passengers</p:link></span><br/>
         <span><p:link outcome="/passengercreate.xhtml">add a new passenger</p:link></span><br/>
         <span><p:link outcome="/ticketlist.xhtml">see a complete list of all tickets</p:link></span>
+        <br/><br/>
+
+    <h:form>
+    <p:commandButton value="book your ticket here" action="#{registerPassengerAndBookTicketCdi.startConversation()}"/>
+        </h:form>
     </h:body>
 </html>

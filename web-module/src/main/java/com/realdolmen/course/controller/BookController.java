@@ -17,13 +17,17 @@ public class BookController {
     @Inject
     BookRepository repository;
 
+
+
     public List<Book> getAllBooks() {
-        return repository.findAll();
+        List<Book> all = repository.findAll();
+        return all;
     }
 
     public void remove(int bookId) {
         repository.remove(bookId);
     }
+
 
     public String getTitle() {
         return null;

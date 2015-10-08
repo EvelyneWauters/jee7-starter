@@ -5,9 +5,11 @@ import com.realdolmen.passenger.domain.Passenger;
 import com.realdolmen.passenger.domain.Ticket;
 import com.realdolmen.passenger.persistence.PassengerRepositoryImplementation;
 
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -15,27 +17,29 @@ import java.util.List;
  */
 
 @Named
-@RequestScoped
-public class PassengerController {
+@ConversationScoped
+public class PassengerController implements Serializable {
 
     @Inject
     PassengerRepositoryImplementation repository;
 
     Passenger passenger = new Passenger();
 
+
+
+
     public List<Passenger> findAllPassengers()  {
         return repository.findAll();
     }
 
-    public String createPassenger()   {
+    public void createPassenger()   {
+        repository.savePassenger(passenger);
+    }
+
+    public String createPassengerAndGoToPassengerList()   {
         repository.savePassenger(passenger);
         return "passengerlist";
     }
-
-    public List<Ticket> retrieveTicketsByPassengerId(int id)    {
-        return repository.findTicketByPassengerId(id);
-    }
-
 
     public Passenger getPassenger() {
         return passenger;
@@ -43,5 +47,9 @@ public class PassengerController {
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public void removePassenger(int pid)    {
+        repository.deletePassengerById(pid);
     }
 }

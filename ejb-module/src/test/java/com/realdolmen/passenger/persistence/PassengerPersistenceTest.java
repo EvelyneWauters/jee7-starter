@@ -19,9 +19,13 @@ public class PassengerPersistenceTest extends DataSetPersistenceTest {
 
     PassengerRepositoryImplementation passengerRepository;
 
+    TicketStatelessBean ticketRepository;
+
     @Before
     public void initializeRepository() {
         passengerRepository = new PassengerRepositoryImplementation();
+        ticketRepository = new TicketStatelessBean();
+        ticketRepository.entityManager = entityManager();
         passengerRepository.entityManager = entityManager();
     }
 
@@ -61,14 +65,37 @@ public class PassengerPersistenceTest extends DataSetPersistenceTest {
     @Test
     public void returntotalFrequentFlyerMiles() throws Exception    {
         int totalFrequentFlyerMiles = passengerRepository.getTotalFrequentFlyerMiles();
-        assertEquals(80, totalFrequentFlyerMiles);
+        assertEquals(160, totalFrequentFlyerMiles);
     }
+
+
+    @Test
+    public void testThatAPassengerCanBeRemovedByIt()    throws Exception    {
+        passengerRepository.deletePassengerById(500);
+        assertNull(passengerRepository.findById(500));
+    }
+    
+    @Test
+    public void testThatAPassengerCanBeRemovedButTicketsStillExist()    throws Exception    {
+        Passenger p = passengerRepository.findById(500);
+        passengerRepository.deletePassengerById(500);
+        assertNotNull(ticketRepository.findById(p.getTicketList().get(0).getId()));
+    }
+
+
+
 
     @Ignore
     @Test
     public void deleteAllPassengersTest() throws Exception  {
         passengerRepository.deleteAllPassengers();
         assertEquals(0, passengerRepository.findAll().size());
+    }
+
+
+    @Test
+    public void testThatAPassengerCanBeFound()  throws Exception    {
+        assertNotNull(passengerRepository.findPassengerByName("a"));
     }
 
 //    @Test

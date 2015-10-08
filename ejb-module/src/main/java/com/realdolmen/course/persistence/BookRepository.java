@@ -11,8 +11,8 @@ import java.util.List;
 @Stateless
 @LocalBean
 public class BookRepository implements RemoteBookRepository {
-    @PersistenceContext
-    EntityManager entityManager;
+        @PersistenceContext
+        EntityManager entityManager;
 
     public List<Book> findAll() {
         return entityManager.createQuery("select b from Book b", Book.class).getResultList();

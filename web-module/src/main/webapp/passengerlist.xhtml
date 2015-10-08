@@ -14,67 +14,77 @@
 <h:body>
 
 
-<h1> All Passengers </h1>
+    <h1> All Passengers </h1>
 
-<p:dataTable id="passengers" value="#{passengerController.findAllPassengers()}" var="passenger">
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="Id"/>
-        </f:facet>
-        <h:outputText value="#{passenger.id}"/>
-    </p:column>
+    <p:dataTable id="passengers" value="#{passengerController.findAllPassengers()}" var="passenger">
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Id"/>
+            </f:facet>
+            <h:outputText value="#{passenger.id}"/>
+        </p:column>
 
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="Name"/>
-        </f:facet>
-        <h:outputText value="#{passenger.firstName} #{passenger.lastName}"/>
-    </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Name"/>
+            </f:facet>
+            <h:outputText value="#{passenger.firstName} #{passenger.lastName}"/>
+        </p:column>
 
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="Frequent Flyer Miles"/>
-        </f:facet>
-        <h:outputText value="#{passenger.frequentFlyerMiles}"/>
-    </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Frequent Flyer Miles"/>
+            </f:facet>
+            <h:outputText value="#{passenger.frequentFlyerMiles}"/>
+        </p:column>
 
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="see tickets for this passenger"/>
-        </f:facet>
-        <h:outputText value="#{passenger.ticketList}"/>
-    </p:column>
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="see tickets for this passenger"/>
+            </f:facet>
+            <p:button outcome="/ticketsperpassenger.xhtml" value="See tickets" icon="ui-icon-star"/>
+        </p:column>
 
-    <p:column>
-        <f:facet name="header">
-            <h:outputText value="tickets for this passenger"/>
-        </f:facet>
-        <h:outputText value="tickets">
-            <p:dataTable id="tickets" value="#{ticketController.retrieveAllTickets()}" var="ticket">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id"/>
-                    </f:facet>
-                    <h:outputText value="#{ticket.id}"/>
-                </p:column>
-            </p:dataTable>
-        </h:outputText>
-    </p:column>
-
-    <!--TODO: MAKE THIS WORK!-->
-    <!--<p:column>-->
+        <!--<p:column>-->
         <!--<f:facet name="header">-->
-            <!--<h:outputText value="Passenger Type"/>-->
+        <!--<h:outputText value="tickets for this passenger"/>-->
+        <!--</f:facet>-->
+        <!--<h:outputText value="">-->
+        <!--<p:dataTable id="tickets" value="#{passengerController.retrieveTicketsByPassengerId(passenger.id)}" var="ticket">-->
+        <!--<p:column>-->
+        <!--<f:facet name="header">-->
+        <!--<h:outputText value="Id"/>-->
+        <!--</f:facet>-->
+        <!--<h:outputText value="#{ticket.id}"/>-->
+        <!--</p:column>-->
+        <!--</p:dataTable>-->
+        <!--</h:outputText>-->
+        <!--</p:column>-->
+
+        <p:column>
+            <h:form>
+                <h:commandLink value="Remove passenger">
+                    <f:ajax render="passengers" event="click"
+                            listener="#{passengerController.removePassenger(passenger.id)}"/>
+                </h:commandLink>
+            </h:form>
+        </p:column>
+
+
+        <!--TODO: MAKE THIS WORK!-->
+        <!--<p:column>-->
+        <!--<f:facet name="header">-->
+        <!--<h:outputText value="Passenger Type"/>-->
         <!--</f:facet>-->
         <!--<h:outputText value="#{passenger.passengerType}"/>-->
-    <!--</p:column>-->
+        <!--</p:column>-->
 
-</p:dataTable>
+    </p:dataTable>
 
-<div>
-    <p:button outcome="/passengercreate.xhtml" value="Add a new passenger" icon="ui-icon-star">
-    </p:button>
-</div>
+    <div>
+        <p:button outcome="/passengercreate.xhtml" value="Add a new passenger" icon="ui-icon-star">
+        </p:button>
+    </div>
 
 </h:body>
 </html>

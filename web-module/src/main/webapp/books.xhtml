@@ -52,14 +52,14 @@
                 <h:outputText value="#{book.genre}"/>
             </p:column>
 
-            <p:column>
+                <p:column>
 
-                <h:form>
-                    <h:commandLink value="Remove">
-                        <f:ajax render="books" event="click" listener="#{bookController.remove(book.id)}"/>
-                    </h:commandLink>
-                </h:form>
-            </p:column>
+                    <h:form>
+                        <h:commandLink value="Remove">
+                            <f:ajax render="books" event="click" listener="#{bookController.remove(book.id)}"/>
+                        </h:commandLink>
+                    </h:form>
+                </p:column>
         </p:dataTable>
     </h:body>
 </html>

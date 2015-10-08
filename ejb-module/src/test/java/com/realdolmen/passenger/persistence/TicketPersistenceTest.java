@@ -4,6 +4,9 @@ import com.realdolmen.course.persistence.DataSetPersistenceTest;
 import com.realdolmen.passenger.domain.Ticket;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
+
 import static org.junit.Assert.assertNotNull;
 
 
@@ -33,4 +36,11 @@ public class TicketPersistenceTest extends DataSetPersistenceTest {
         assertEquals(8000, entityManager().find(Ticket.class, 1).getPrice());
     }
 
+
+    @Test
+    public void testThatATicketIsAssignedToAPassenger() throws Exception    {
+        List<Ticket> ticketByPassengerId = ticketRepository.findTicketByPassengerId(500);
+        assertEquals(1, ticketByPassengerId.size());
+        //assertEquals(789, ticketByPassengerId.get(0).getPrice());
+    }
 }

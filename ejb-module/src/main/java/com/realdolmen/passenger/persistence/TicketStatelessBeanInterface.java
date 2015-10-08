@@ -16,5 +16,8 @@ public interface TicketStatelessBeanInterface {
 
     public void updateTicket(Ticket ticket);
 
+     List<Ticket> findTicketByPassengerId(int i);
+
+     public void bookTicketForPassenger(int pid, Ticket ticket);
 
  }
